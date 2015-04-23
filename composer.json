@@ -1,0 +1,19 @@
+{
+    "name": "saintberry/phantomjs-extension",
+    "description": "Adds a PhantomJs driver to Behat's Mink extension. This will automatically start and stop PhantomJs in your tests.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Berry",
+            "email": "david.berry@prettygraphic.com.au"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "behat/behat": "~3.0",
+        "behat/mink": "~1.5",
+        "behat/mink-extension": "~2.0"
+    }
+}
