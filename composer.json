@@ -15,5 +15,8 @@
         "behat/behat": "~3.0",
         "behat/mink": "~1.5",
         "behat/mink-extension": "~2.0"
+    },
+    "autoload": {
+        "psr-0": { "Behat\\PhantomJsExtension": "src/" }
     }
 }
