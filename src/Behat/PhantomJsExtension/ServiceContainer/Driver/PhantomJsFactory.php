@@ -65,7 +65,7 @@ class PhantomJsFactory extends Selenium2Factory
             );
         }
 
-        return new Definition('Behat\PhantomJsExtension\Driver', array(
+        return new Definition('Behat\PhantomJsExtension\Driver\PhantomJsDriver', array(
             $config['browser'],
             array_replace($extraCapabilities, $guessedCapabilities, $config['capabilities']),
             $config['wd_host'],
