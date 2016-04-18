@@ -40,9 +40,7 @@ class PhantomJsDriver extends Selenium2Driver
         $wdPort = 8643,
         $bin = '/usr/local/bin/phantomjs'
     ) {
-        $this->setBrowserName($browserName);
-        $this->setDesiredCapabilities($desiredCapabilities);
-        $this->setWebDriver(new WebDriver($wdHost));
+        parent::__construct($browserName, $desiredCapabilities, $wdHost);
         $this->wdPort = $wdPort;
         $this->phantomJsBin = $bin;
     }
