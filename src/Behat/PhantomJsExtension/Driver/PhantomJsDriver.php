@@ -81,5 +81,6 @@ class PhantomJsDriver extends Selenium2Driver
     {
         parent::stop();
         $this->phantomJsProc->stop(0);
+        unset($this->phantomJsProc);
     }
 }
