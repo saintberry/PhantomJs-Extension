@@ -68,7 +68,7 @@ class PhantomJsDriver extends Selenium2Driver
         if (!$this->phantomJsProc->isRunning()) {
             throw new DriverException('Could not confirm PhantomJs is running');
         }
-        
+        sleep(1);
         parent::start();
     }
 
