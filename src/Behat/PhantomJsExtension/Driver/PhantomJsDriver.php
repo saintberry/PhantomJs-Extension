@@ -54,10 +54,12 @@ class PhantomJsDriver extends Selenium2Driver
             return parent::start();
         }
 
-        $cmd = sprintf('exec %s --webdriver=%d', $this->phantomJsBin, $this->wdPort);
+        $cmd = sprintf('exec %s --webdriver=%d /dev/null 2>&1', $this->phantomJsBin, $this->wdPort);
 
         try {
             $this->phantomJsProc = new Process($cmd);
+            $this->phantomJsProc->disableOutput();
+            $this->phantomJsProc->setTimeout(600);
             $this->phantomJsProc->start();
         } catch (\Exception $e) {
             throw new DriverException('Could not start PhantomJs', 0, $e);
