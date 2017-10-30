@@ -40,9 +40,7 @@ class PhantomJsDriver extends Selenium2Driver
         $wdPort = 8643,
         $bin = '/usr/local/bin/phantomjs'
     ) {
-        $this->setBrowserName($browserName);
-        $this->setDesiredCapabilities($desiredCapabilities);
-        $this->setWebDriver(new WebDriver($wdHost));
+        parent::__construct($browserName, $desiredCapabilities, $wdHost);
         $this->wdPort = $wdPort;
         $this->phantomJsBin = $bin;
     }
@@ -56,10 +54,12 @@ class PhantomJsDriver extends Selenium2Driver
             return parent::start();
         }
 
-        $cmd = sprintf('exec %s --webdriver=%d', $this->phantomJsBin, $this->wdPort);
+        $cmd = sprintf('exec %s --webdriver=%d /dev/null 2>&1', $this->phantomJsBin, $this->wdPort);
 
         try {
             $this->phantomJsProc = new Process($cmd);
+            $this->phantomJsProc->disableOutput();
+            $this->phantomJsProc->setTimeout(600);
             $this->phantomJsProc->start();
         } catch (\Exception $e) {
             throw new DriverException('Could not start PhantomJs', 0, $e);
@@ -68,8 +68,6 @@ class PhantomJsDriver extends Selenium2Driver
         if (!$this->phantomJsProc->isRunning()) {
             throw new DriverException('Could not confirm PhantomJs is running');
         }
-
-        // give PhantomJs a chance to start before creating a session
         sleep(1);
         parent::start();
     }
@@ -81,5 +79,6 @@ class PhantomJsDriver extends Selenium2Driver
     {
         parent::stop();
         $this->phantomJsProc->stop(0);
+        $this->phantomJsProc = null;
     }
 }
